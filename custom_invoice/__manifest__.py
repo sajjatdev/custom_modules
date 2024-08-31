@@ -7,6 +7,7 @@
     "depends": ["base_setup", "account", "l10n_gcc_invoice", "web"],
     "data": [
         "report/custom_invoice.xml",
+        "report/google_font.xml",
     ],
     "installable": True,
     "application": False,

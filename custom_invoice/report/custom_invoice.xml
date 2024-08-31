@@ -83,7 +83,7 @@
                          style="display:block;"
                          t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 200, 200)"/>
                     </div>
-                    <div id="informations" class="col-9 p-1 bg-light" >
+                    <div id="informations" class="col-9 p-1 bg-secondary-opacity" >
                         <div class="row">
                             <div class="col-6">
                                 <!-- Invoice Data -->
@@ -315,7 +315,7 @@
                     <thead>
                         <tr>
                             <t t-set="colspan" t-value="6"/>
-                            <th name="th_total" class="text-end bg-light">
+                            <th name="th_total" class="text-end bg-secondary-opacity" style="background-color: #e3e3e3;">
                                 <span>
                                     السعر الاجمالي
                                 </span>
@@ -325,7 +325,7 @@
                                 </span>
                             </th>
                             <th name="th_tax_amount"
-                                class="text-end bg-light">
+                                class="text-end bg-secondary-opacity" style="background-color: #e3e3e3;">
                                 <span>
                                     قيمة الضريبة
                                 </span>
@@ -334,7 +334,7 @@
                                     VAT Amount
                                 </span>
                             </th>
-                            <th name="th_subtotal" class="text-end bg-light">
+                            <th name="th_subtotal" class="text-end bg-secondary-opacity" style="background-color: #e3e3e3;">
                                 <span>
                                     مبلغ
                                 </span>
@@ -344,7 +344,7 @@
                                 </span>
                             </th>
                             <th name="th_taxes"
-                                class="text-end bg-light">
+                                class="text-end bg-secondary-opacity" style="background-color: #e3e3e3;">
                                 <span>
                                     الضرائب
                                 </span>
@@ -354,7 +354,7 @@
                                 </span>
                             </th>
                             <th name="th_price_unit" t-if="display_discount"
-                                class="text-end bg-light">
+                                class="text-end bg-secondary-opacity" style="background-color: #e3e3e3;">
                                 <span>
                                     خصم %
                                 </span>
@@ -365,7 +365,7 @@
                                 <t t-set="colspan" t-value="colspan+1"/>
                             </th>
                             <th name="th_priceunit"
-                                class="text-end bg-light">
+                                class="text-end bg-secondary-opacity" style="background-color: #e3e3e3;">
                                 <span>
                                     سعر الوحدة
                                 </span>
@@ -374,7 +374,7 @@
                                     Unit price
                                 </span>
                             </th>
-                            <th name="th_quantity" class="text-end bg-light">
+                            <th name="th_quantity" class="text-end bg-secondary-opacity" style="background-color: #e3e3e3;">
                                 <span>
                                     الكمية
                                 </span>
@@ -383,7 +383,7 @@
                                     Quantity
                                 </span>
                             </th>
-                            <th name="th_source" class="d-none text-start bg-light" t-if="0">
+                            <th name="th_source" class="d-none text-start bg-secondary-opacity" t-if="0" style="background-color: #e3e3e3;">
                                 <span>
                                     المستند المصدر
                                 </span>
@@ -392,7 +392,7 @@
                                     Source Document
                                 </span>
                             </th>
-                            <th name="th_description" class="text-end bg-light">
+                            <th name="th_description" class="text-end bg-secondary-opacity" style="background-color: #e3e3e3;">
                                 <span>
                                     الوصف
                                 </span>

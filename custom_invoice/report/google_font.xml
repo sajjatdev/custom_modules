@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_header" inherit_id="web.report_layout">
+        <xpath expr="//head" position="inside">
+            <link href="https://fonts.googleapis.com/css2?family=Tajawal" rel="stylesheet"/>
+            <style>
+            /* Apply the Google Font globally */
+            body {
+                font-family: 'Tajawal', sans-serif;
+            }
+            .bg-secondary-opacity {
+                background-color: #e3e3e3; /* Replace with your color and opacity */
+            }
+        </style>
+        </xpath>
+    </template>
+</odoo>
