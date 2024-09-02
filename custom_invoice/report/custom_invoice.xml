@@ -3,9 +3,25 @@
     <template id="customer_code" inherit_id="web.external_layout_boxed">
         <xpath expr="//div[hasclass('o_boxed_header')]" position="replace">
             <div class="o_boxed_header">
+                
+            </div>
+        </xpath>
+    </template>
+    <!-- Address Display -->
+    <template id="address_remove" name="address_remove" inherit_id="web.address_layout">
+        <xpath expr="//div[contains(@class, 'address') and contains(@class, 'row')]" position="replace">
+            <div t-if="address" class="address row ">
+            
+            </div>
+        </xpath>
+    </template>
+    <!-- Layout Template Inherit -->
+    <template id="layout_template_id" name="layout_template_id" inherit_id="l10n_gcc_invoice.arabic_english_invoice">
+        <xpath expr="//div[hasclass('page')]" position="replace">
+            <div class="page">
                 <div class="row mb8">
                     <div class="col align-items-center">
-                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo" width="80"/>
+                        <!-- <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo" width="80"/> -->
                     </div>
                     <div class="col align-items-center">
                         <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Tax Invoice</p>
@@ -101,21 +117,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </xpath>
-    </template>
-    <!-- Address Display -->
-    <template id="address_remove" name="address_remove" inherit_id="web.address_layout">
-        <xpath expr="//div[contains(@class, 'address') and contains(@class, 'row')]" position="replace">
-            <div t-if="address" class="address row ">
-            
-            </div>
-        </xpath>
-    </template>
-    <!-- Layout Template Inherit -->
-    <template id="layout_template_id" name="layout_template_id" inherit_id="l10n_gcc_invoice.arabic_english_invoice">
-        <xpath expr="//div[hasclass('page')]" position="replace">
-            <div class="page">
                 <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
                 <table class="table table-sm o_main_table" name="invoice_line_table">
                     <thead>
