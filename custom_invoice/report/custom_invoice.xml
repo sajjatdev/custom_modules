@@ -31,7 +31,7 @@
                             <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_invoice'">
                                 Vendor Bill
                             </p>
-                            <img t-if="o.l10n_sa_qr_code_str" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"  class="d-block mx-auto" width="50px" height="50px"/>
+                            <img t-if="o.l10n_sa_qr_code_str" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"  class="d-block mx-auto" width="100px" height="100px"/>
                             <p class="text-center" style="font-size:19px;font-weight: bold;" t-field="o.name"/>
                         </div>
                     </div>
@@ -426,6 +426,9 @@
                         <img class="ml-auto" t-if="o.company_id.seal" t-att-src="image_data_uri(o.company_id.seal)" alt="seal" width="150px"/>
                     </div>
                 </div>
+                <br/>
+                <br/>
+                <img t-if="o.l10n_sa_qr_code_str" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"  class="d-block mx-auto" width="100px" height="100px"/>
             </div>
         </xpath>
     </template>
