@@ -3,58 +3,40 @@
     <template id="customer_code" inherit_id="web.external_layout_boxed">
         <xpath expr="//div[hasclass('o_boxed_header')]" position="replace">
             <div class="o_boxed_header">
-                
-            </div>
-        </xpath>
-    </template>
-    <!-- Address Display -->
-    <template id="address_remove" name="address_remove" inherit_id="web.address_layout">
-        <xpath expr="//div[contains(@class, 'address') and contains(@class, 'row')]" position="replace">
-            <div t-if="address" class="address row ">
-            
-            </div>
-        </xpath>
-    </template>
-    <!-- Layout Template Inherit -->
-    <template id="layout_template_id" name="layout_template_id" inherit_id="l10n_gcc_invoice.arabic_english_invoice">
-        <xpath expr="//div[hasclass('page')]" position="replace">
-            <div class="page">
                 <div class="row mb8">
-                    <div class="col align-items-center">
-                        <!-- <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo" width="80"/> -->
+                    <div  t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
                     </div>
-                    <div class="col align-items-center">
-                        <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Tax Invoice</p>
-                        <p style="font-size:20px;color:red;font-weight: bold;" t-elif="o.move_type == 'out_invoice' and o.state == 'draft'">
+                    <div t-attf-class="#{'col-auto mw-100' if report_type != 'html' else 'col'} mb-2">
+                        <div t-if="o" class="col align-items-center">
+                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Tax Invoice</p>
+                            <p style="font-size:20px;color:red;font-weight: bold;" t-elif="o.move_type == 'out_invoice' and o.state == 'draft'">
                                  Draft Invoice
                             </p>
-                        <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_invoice' and o.state == 'cancel'">
+                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_invoice' and o.state == 'cancel'">
                                 Cancelled Invoice
                             </p>
-                        <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'posted'">
+                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'posted'">
                                 Credit Note
                             </p>
-                        <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'draft'">
+                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'draft'">
                                 Draft Credit Note
                             </p>
-                        <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'cancel'">
+                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'cancel'">
                                 Cancelled Credit Note
                             </p>
-                        <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_refund'">
+                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_refund'">
                                 Vendor Credit Note
                             </p>
-                        <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_invoice'">
+                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_invoice'">
                                 Vendor Bill
                             </p>
-                        <!-- <img t-if="o.l10n_sa_qr_code_str"
-                         style="display:block;"
-                         t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"
-                         /> -->
-                        <img src="/custom_invoice/static/src/img/download.png" class="d-block mx-auto" width="50px" height="50px"/>
-                        <p class="text-center" style="font-size:19px;font-weight: bold;" t-field="o.name"/>
+                            <img t-if="o.l10n_sa_qr_code_str" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"  class="d-block mx-auto" width="50px" height="50px"/>
+                            <p class="text-center" style="font-size:19px;font-weight: bold;" t-field="o.name"/>
+                        </div>
                     </div>
-                    <div class="col">
-                        <div class="row " t-if="o.invoice_date" name="invoice_date">
+                    <div t-if="o" t-attf-class="#{'col-auto mw-100' if report_type != 'html' else 'col'} mb-2">
+                        <div  class="row " t-if="o.invoice_date" name="invoice_date">
                             <div class="col-4">
                                 <strong style="white-space:nowrap">
                                             Invoice Date:
@@ -117,6 +99,21 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </xpath>
+    </template>
+    <!-- Address Display -->
+    <template id="address_remove" name="address_remove" inherit_id="web.address_layout">
+        <xpath expr="//div[contains(@class, 'address') and contains(@class, 'row')]" position="replace">
+            <div t-if="address" class="address row ">
+            
+            </div>
+        </xpath>
+    </template>
+    <!-- Layout Template Inherit -->
+    <template id="layout_template_id" name="layout_template_id" inherit_id="l10n_gcc_invoice.arabic_english_invoice">
+        <xpath expr="//div[hasclass('page')]" position="replace">
+            <div class="page">
                 <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
                 <table class="table table-sm o_main_table" name="invoice_line_table">
                     <thead>
@@ -278,21 +275,21 @@
                         </t>
                     </tbody>
                 </table>
-                <div class="clearfix pt-4 pb-3" style="margin-left:150px;margin-right:150px;">
+                <div class="clearfix pt-4 pb-3" t-attf-style="#{'margin-left:200px;margin-right:200px;' if report_type != 'html' else 'margin-left:150px;margin-right:150px;'}">
                     <div class="row p-1">
-                        <div class="col">
+                        <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'}">
                             <strong>Subtotal</strong>
                         </div>
-                        <div class="col lign-self-center text-center">
+                        <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} lign-self-center text-center">
                             <span t-field="o.amount_untaxed"/>
                         </div>
-                        <div class="col align-self-end text-end">
+                        <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} align-self-end text-end">
                             <strong> الإجمالي الفرعي</strong>
                         </div>
                     </div>
                     <hr style="padding:0.5px;background-color:block;margin:0px;opacity:1;"/>
                     <div class="row p-1">
-                        <div class="col">
+                        <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'}">
                             <strong>
                                 <t t-set="tax_totals" t-value="o.tax_totals"/>
                                 <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
@@ -318,7 +315,7 @@
                                 </t>
                             </strong>
                         </div>
-                        <div class="col lign-self-center text-center">
+                        <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} lign-self-center text-center">
                             <t t-set="tax_totals" t-value="o.tax_totals"/>
                             <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
                                 <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
@@ -342,19 +339,19 @@
                                 </t>
                             </t>
                         </div>
-                        <div class="col align-self-end text-end">
+                        <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} align-self-end text-end">
                             <strong>ضرائب القيمة المضافة</strong>
                         </div>
                     </div>
                     <hr style="padding:0.5px;background-color:block;margin:0px;opacity:1;"/>
                     <div class="row p-1">
-                        <div class="col">
+                        <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'}">
                             <strong>Total</strong>
                         </div>
-                        <div class="col lign-self-center text-center">
+                        <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} lign-self-center text-center">
                             <span t-field="o.amount_total"/>
                         </div>
-                        <div class="col align-self-end text-end">
+                        <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} lign-self-end text-end">
                             <strong>المجموع</strong>
                         </div>
                     </div>
@@ -364,15 +361,15 @@
                             <t t-set="payments_vals" t-value="o.sudo().invoice_payments_widget and o.sudo().invoice_payments_widget['content'] or []"/>
                             <t t-foreach="payments_vals" t-as="payment_vals">
                                 <div class="row p-1">
-                                    <div class="col">
+                                    <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'}">
                                         <strong>Paid on</strong>
                                         <t t-out="payment_vals['date']"/>
                                     </div>
-                                    <div class="col lign-self-center text-center">
+                                    <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} lign-self-center text-center">
                                         <span t-out="payment_vals['amount']"
                                                           t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                     </div>
-                                    <div class="col align-self-end text-end">
+                                    <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} lign-self-end text-end">
                                         <strong>دفعت على</strong>
                                     </div>
                                 </div>
@@ -380,13 +377,13 @@
                             </t>
                             <t t-if="len(payments_vals) > 0">
                                 <div class="row p-1">
-                                    <div class="col">
+                                    <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'}">
                                         <strong>Amount Due</strong>
                                     </div>
-                                    <div class="col lign-self-center text-center">
+                                    <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} lign-self-center text-center">
                                         <span t-field="o.amount_residual"/>
                                     </div>
-                                    <div class="col align-self-end text-end">
+                                    <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} lign-self-end text-end">
                                         <strong>المبلغ المستحق</strong>
                                     </div>
                                 </div>
@@ -394,6 +391,40 @@
                             </t>
                         </t>
                     </t>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <div class="row">
+                    <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'}">
+                        <div class="row">
+                            <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col-4'}">
+                                <h6>SALES:</h6>
+                            </div>
+                            <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col-4'} align-items-start text-start">
+                                <t t-esc="o.invoice_user_id.name"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col-4'}">
+                                <h6>SIGNATURE:</h6>
+                            </div>
+                            <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col-2'} align-items-start">
+                                <img t-if="o.company_id.signature" t-att-src="image_data_uri(o.company_id.signature)" alt="signature" width="100px"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col-4'}">
+                                <h6>CUSTOMER:</h6>
+                            </div>
+                            <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col-4'} align-items-start">
+                                <t t-esc="o.partner_id.name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} d-flex align-items-end justify-content-end">
+                        <img class="ml-auto" t-if="o.company_id.seal" t-att-src="image_data_uri(o.company_id.seal)" alt="seal" width="150px"/>
+                    </div>
                 </div>
             </div>
         </xpath>
