@@ -7,32 +7,137 @@
                     <div  t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2">
                         <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
                     </div>
-                    <div t-attf-class="#{'col-auto mw-100' if report_type != 'html' else 'col'} mb-2">
-                        <div t-if="o" class="col align-items-center">
-                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Tax Invoice</p>
+                    <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} mb-2">
+                        <div class="company-info" style="text-align: right;">
+                            <h4 class="text-dark mb-0">
+                                <strong t-esc="o.company_id.name" />
+                            </h4>
+                            <p class="mb-0" t-esc="o.company_id.street" />
+                            <p class="mb-0">
+                                <span t-esc="o.company_id.city" />,
+                                <span t-esc="o.company_id.state_id.name" />
+                                <span t-esc="o.company_id.zip" />,
+                                <span t-esc="o.company_id.country_id.name" />
+                            </p>
+                            <p class="mb-0">
+                                <strong>Website:</strong>
+                                <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
+                            </p>
+                            <p class="mb-0">
+                                <strong>Phone:</strong>
+                                <span t-esc="o.company_id.phone" />
+                            </p>
+                            <p  class="mb-0">
+                                <strong>Email:</strong>
+                                <span t-esc="o.company_id.email" />
+                            </p>
+                        </div>
+                    </div>
+                    <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} mb-2">
+                        <div class="client-info" style="text-align: right;">
+                            <t t-if="o.partner_id.is_company">
+                                <!-- Client is a Company -->
+                                <h4 class="text-dark mb-0">
+                                    <strong t-esc="o.partner_id.name" />
+                                </h4>
+                                <p  class="mb-0">
+                                    <strong t-esc="o.partner_id.street" />
+                                </p>
+                                <p  class="mb-0">
+                                    <strong>
+                                        <span t-esc="o.partner_id.city" />,
+                                        <span t-esc="o.partner_id.state_id.name" />
+                                        <span t-esc="o.partner_id.zip" />,
+                                        <span t-esc="o.partner_id.country_id.name" />
+                                    </strong>
+                                </p>
+                                <p class="mb-0">
+                                    <strong>Website:</strong>
+                                    <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
+                                </p>
+                                <p  class="mb-0">
+                                    <strong>Phone:</strong>
+                                    <span t-esc="o.partner_id.phone" />
+                                </p>
+                                <p  class="mb-0">
+                                    <strong>Email:</strong>
+                                    <span t-esc="o.partner_id.email" />
+                                </p>
+                            </t>
+                            <t t-else="">
+                                <!-- Client is an Individual -->
+                                <h4 class="text-dark mb-0">
+                                    <strong t-esc="o.partner_id.name" />
+                                </h4>
+                                <p  class="mb-0">
+                                    <strong t-esc="o.partner_id.street" />
+                                </p>
+                                <p  class="mb-0">
+                                    <strong>
+                                        <span t-esc="o.partner_id.city" />,
+                                        <span t-esc="o.partner_id.state_id.name" />
+                                        <span t-esc="o.partner_id.zip" />,
+                                        <span t-esc="o.partner_id.country_id.name" />
+                                    </strong>
+                                </p>
+                                <p class="mb-0">
+                                    <strong>Website:</strong>
+                                    <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
+                                </p>
+                                <p  class="mb-0">
+                                    <strong>Phone:</strong>
+                                    <span t-esc="o.partner_id.phone" />
+                                </p>
+                                <p  class="mb-0">
+                                    <strong>Email:</strong>
+                                    <span t-esc="o.partner_id.email" />
+                                </p>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+    <!-- Address Display -->
+    <template id="address_remove" name="address_remove" inherit_id="web.address_layout">
+        <xpath expr="//div[contains(@class, 'address') and contains(@class, 'row')]" position="replace">
+            <div t-if="address" class="address row ">
+
+            </div>
+        </xpath>
+    </template>
+    <!-- Layout Template Inherit -->
+    <template id="layout_template_id" name="layout_template_id" inherit_id="l10n_gcc_invoice.arabic_english_invoice">
+        <xpath expr="//div[hasclass('page')]" position="replace">
+            <div class="page">
+                <div class="row">
+                    <div t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} mb-3">
+                        <div t-if="o">
+                            <p class="text-start" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Tax Invoice</p>
                             <p style="font-size:20px;color:red;font-weight: bold;" t-elif="o.move_type == 'out_invoice' and o.state == 'draft'">
                                  Draft Invoice
                             </p>
-                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_invoice' and o.state == 'cancel'">
+                            <p class="text-start" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_invoice' and o.state == 'cancel'">
                                 Cancelled Invoice
                             </p>
-                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'posted'">
+                            <p class="text-start" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'posted'">
                                 Credit Note
                             </p>
-                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'draft'">
+                            <p class="text-start" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'draft'">
                                 Draft Credit Note
                             </p>
-                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'cancel'">
+                            <p class="text-start" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'out_refund' and o.state == 'cancel'">
                                 Cancelled Credit Note
                             </p>
-                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_refund'">
+                            <p class="text-start" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_refund'">
                                 Vendor Credit Note
                             </p>
-                            <p class="text-center" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_invoice'">
+                            <p class="text-start" style="font-size:20px;color:red;font-weight: bold;margin-bottom:0px;" t-elif="o.move_type == 'in_invoice'">
                                 Vendor Bill
                             </p>
-                            <img t-if="o.l10n_sa_qr_code_str" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"  class="d-block mx-auto" width="100px" height="100px"/>
-                            <p class="text-center" style="font-size:19px;font-weight: bold;" t-field="o.name"/>
+                            <img t-if="o.l10n_sa_qr_code_str" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"  width="100px" height="100px"/>
+                            <p class="text-start" style="font-size:19px;font-weight: bold;" t-field="o.name"/>
                         </div>
                     </div>
                     <div t-if="o" t-attf-class="#{'col-auto mw-100' if report_type != 'html' else 'col'} mb-2">
@@ -99,21 +204,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </xpath>
-    </template>
-    <!-- Address Display -->
-    <template id="address_remove" name="address_remove" inherit_id="web.address_layout">
-        <xpath expr="//div[contains(@class, 'address') and contains(@class, 'row')]" position="replace">
-            <div t-if="address" class="address row ">
-            
-            </div>
-        </xpath>
-    </template>
-    <!-- Layout Template Inherit -->
-    <template id="layout_template_id" name="layout_template_id" inherit_id="l10n_gcc_invoice.arabic_english_invoice">
-        <xpath expr="//div[hasclass('page')]" position="replace">
-            <div class="page">
                 <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
                 <table class="table table-sm o_main_table" name="invoice_line_table">
                     <thead>
@@ -213,8 +303,7 @@
                                         <span class="text-nowrap" t-field="line.price_subtotal"/>
                                     </td>
                                     <td class="text-end">
-                                        <span t-out="', '.join(map(lambda x: (x.invoice_label or x.name), line.tax_ids))"
-                                              id="line_tax_ids"/>
+                                        <span t-out="''.join(map(lambda x: (x.invoice_label or x.name).replace('Sales Tax', ''), line.tax_ids))" id="line_tax_ids"/>
                                     </td>
                                     <td t-if="display_discount"
                                         class="text-end">
