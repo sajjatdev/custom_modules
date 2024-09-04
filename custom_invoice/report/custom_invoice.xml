@@ -12,82 +12,83 @@
                             <h4 class="text-dark mb-0">
                                 <strong t-esc="o.company_id.name" />
                             </h4>
-                            <p class="mb-0" t-esc="o.company_id.street" />
+                            <t t-if="o.company_id.street">
+                                <p class="mb-0" t-esc="o.company_id.street" />
+                            </t>
                             <p class="mb-0">
-                                <span t-esc="o.company_id.city" />,
-                                <span t-esc="o.company_id.state_id.name" />
-                                <span t-esc="o.company_id.zip" />,
-                                <span t-esc="o.company_id.country_id.name" />
+                                <t t-if="o.company_id.city">
+                                    <span t-esc="o.company_id.city" />,
+                                </t>
+                                <t t-if="o.company_id.state_id.name">
+                                    <span t-esc="o.company_id.state_id.name" />
+                                </t>
+                                <t t-if="o.company_id.zip">
+                                    <span t-esc="o.company_id.zip" />,
+                                </t>
+                                <t t-if="o.company_id.country_id.name">
+                                    <span t-esc="o.company_id.country_id.name" />
+                                </t>
                             </p>
-                            <p class="mb-0">
-                                <strong>Website:</strong>
-                                <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
-                            </p>
-                            <p class="mb-0">
-                                <strong>Phone:</strong>
-                                <span t-esc="o.company_id.phone" />
-                            </p>
-                            <p  class="mb-0">
-                                <strong>Email:</strong>
-                                <span t-esc="o.company_id.email" />
-                            </p>
+                            <t t-if="o.company_id.website">
+                                <p class="mb-0">
+                                    <strong>Website:</strong>
+                                    <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
+                                </p>
+                            </t>
+                            <t t-if="o.company_id.phone">
+                                <p class="mb-0">
+                                    <strong>Phone:</strong>
+                                    <span t-esc="o.company_id.phone" />
+                                </p>
+                            </t>
+                            <t t-if="o.company_id.email">
+                                <p  class="mb-0">
+                                    <strong>Email:</strong>
+                                    <span t-esc="o.company_id.email" />
+                                </p>
+                            </t>
                         </div>
                     </div>
                     <div  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} mb-2">
                         <div class="client-info" style="text-align: right;">
-                            <t t-if="o.partner_id.is_company">
-                                <!-- Client is a Company -->
-                                <h4 class="text-dark mb-0">
-                                    <strong t-esc="o.partner_id.name" />
-                                </h4>
+                            <!-- Client is a Company -->
+                            <h4 class="text-dark mb-0">
+                                <strong t-esc="o.partner_id.name" />
+                            </h4>
+                            <t t-if="o.partner_id.street">
                                 <p  class="mb-0">
                                     <strong t-esc="o.partner_id.street" />
-                                </p>
-                                <p  class="mb-0">
-                                    <strong>
-                                        <span t-esc="o.partner_id.city" />,
-                                        <span t-esc="o.partner_id.state_id.name" />
-                                        <span t-esc="o.partner_id.zip" />,
-                                        <span t-esc="o.partner_id.country_id.name" />
-                                    </strong>
-                                </p>
-                                <p class="mb-0">
-                                    <strong>Website:</strong>
-                                    <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
-                                </p>
-                                <p  class="mb-0">
-                                    <strong>Phone:</strong>
-                                    <span t-esc="o.partner_id.phone" />
-                                </p>
-                                <p  class="mb-0">
-                                    <strong>Email:</strong>
-                                    <span t-esc="o.partner_id.email" />
                                 </p>
                             </t>
-                            <t t-else="">
-                                <!-- Client is an Individual -->
-                                <h4 class="text-dark mb-0">
-                                    <strong t-esc="o.partner_id.name" />
-                                </h4>
-                                <p  class="mb-0">
-                                    <strong t-esc="o.partner_id.street" />
-                                </p>
-                                <p  class="mb-0">
-                                    <strong>
+                            <p  class="mb-0">
+                                <strong>
+                                    <t t-if="o.partner_id.city">
                                         <span t-esc="o.partner_id.city" />,
+                                    </t>
+                                    <t t-if="o.partner_id.state_id.name">
                                         <span t-esc="o.partner_id.state_id.name" />
+                                    </t>
+                                    <t t-if="o.partner_id.zip">
                                         <span t-esc="o.partner_id.zip" />,
+                                    </t>
+                                    <t t-if="o.partner_id.country_id.name">
                                         <span t-esc="o.partner_id.country_id.name" />
-                                    </strong>
-                                </p>
+                                    </t>
+                                </strong>
+                            </p>
+                            <t t-if="o.company_id.website">
                                 <p class="mb-0">
                                     <strong>Website:</strong>
                                     <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
                                 </p>
+                            </t>
+                            <t t-if="o.partner_id.phone">
                                 <p  class="mb-0">
                                     <strong>Phone:</strong>
                                     <span t-esc="o.partner_id.phone" />
                                 </p>
+                            </t>
+                            <t t-if="o.partner_id.email">
                                 <p  class="mb-0">
                                     <strong>Email:</strong>
                                     <span t-esc="o.partner_id.email" />
