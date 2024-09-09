@@ -6,3 +6,5 @@ class CustomCompanyModel(models.Model):
 
     signature = fields.Binary(string="Signature")
     seal = fields.Binary(string="The Seal")
+
+    

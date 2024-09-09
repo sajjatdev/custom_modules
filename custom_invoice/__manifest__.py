@@ -4,8 +4,9 @@
     "version": "1.0",
     "summary": "Custom Invoice Template for Odoo 17",
     "category": "Invoice",
-    "depends": ["base_setup", "account", "l10n_gcc_invoice", "web"],
+    "depends": ["base_setup", "account", "l10n_gcc_invoice", "web", "contacts"],
     "data": [
+        "views/contacts_view.xml",
         "views/layout_views.xml",
         "report/custom_invoice.xml",
         "report/google_font.xml",
