@@ -4,33 +4,33 @@
         <xpath expr="//div[hasclass('o_boxed_header')]" position="replace">
             <div class="o_boxed_header">
                 <div class="row mb8">
-                    <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2">
-                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
-                    </div>
-                    <div t-if="o"  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} mb-2">
-                        <p t-att-style="'color: %s; font-size: 20px; font-weight: bold; margin-bottom: 0px;' % (o.company_id.primary_color or '#000000')" class="text-start"  t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Tax Invoice - الفاتورة الضريبية</p>
-                        <p style="font-size:20px;color:red;font-weight: bold;" t-elif="o.move_type == 'out_invoice' and o.state == 'draft'">
+                    <div t-if="o"  t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} align-items-start text-start mb-2">
+                        <p   t-att-style="'color: %s; font-size: 15px; font-weight: bold; margin-bottom: 0px; white-space:nowrap;' % (o.company_id.primary_color or '#000000')" class="text-start"  t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Tax Invoice - الفاتورة الضريبية</p>
+                        <p style="font-size:15px;color:red;font-weight: bold;" t-elif="o.move_type == 'out_invoice' and o.state == 'draft'">
                                  Draft Invoice - مشروع الفاتورة
                             </p>
-                        <p class="text-start" t-att-style="'color: %s; font-size: 20px; font-weight: bold; margin-bottom: 0px;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'out_invoice' and o.state == 'cancel'">
+                        <p class="text-start" t-att-style="'color: %s; font-size: 15px; font-weight: bold; margin-bottom: 0px;white-space:nowrap;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'out_invoice' and o.state == 'cancel'">
                                 Cancelled Invoice - الفاتورة الملغاة
                             </p>
-                        <p class="text-start" t-att-style="'color: %s; font-size: 20px; font-weight: bold; margin-bottom: 0px;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'out_refund' and o.state == 'posted'">
+                        <p class="text-start" t-att-style="'color: %s; font-size: 15px; font-weight: bold; margin-bottom: 0px;white-space:nowrap;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'out_refund' and o.state == 'posted'">
                                 Credit Note - مذكرة الائتمان
                             </p>
-                        <p class="text-start" t-att-style="'color: %s; font-size: 20px; font-weight: bold; margin-bottom: 0px;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'out_refund' and o.state == 'draft'">
+                        <p class="text-start" t-att-style="'color: %s; font-size: 15px; font-weight: bold; margin-bottom: 0px;white-space:nowrap;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'out_refund' and o.state == 'draft'">
                                 Draft Credit Note - مسودة مذكرة الائتمان
                             </p>
-                        <p class="text-start" t-att-style="'color: %s; font-size: 20px; font-weight: bold; margin-bottom: 0px;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'out_refund' and o.state == 'cancel'">
+                        <p class="text-start" t-att-style="'color: %s; font-size: 15px; font-weight: bold; margin-bottom: 0px;white-space:nowrap;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'out_refund' and o.state == 'cancel'">
                                 Cancelled Credit Note - مذكرة الائتمان الملغاة
                             </p>
-                        <p class="text-start" t-att-style="'color: %s; font-size: 20px; font-weight: bold; margin-bottom: 0px;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'in_refund'">
+                        <p class="text-start" t-att-style="'color: %s; font-size: 15px; font-weight: bold; margin-bottom: 0px;white-space:nowrap;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'in_refund'">
                                 Vendor Credit Note - مذكرة ائتمان البائع
                             </p>
-                        <p class="text-start" t-att-style="'color: %s; font-size: 20px; font-weight: bold; margin-bottom: 0px;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'in_invoice'">
+                        <p class="text-start" t-att-style="'color: %s; font-size: 15px; font-weight: bold; margin-bottom: 0px;white-space:nowrap;' % (o.company_id.primary_color or '#000000')" t-elif="o.move_type == 'in_invoice'">
                                 Vendor Bill - فاتورة البائع
                             </p>
-                        <img t-if="o.l10n_sa_qr_code_str" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"  width="100px" height="100px"/>
+                        <img t-if="o.l10n_sa_qr_code_str" t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR', quote_plus(o.l10n_sa_qr_code_str), 150, 150)"  width="100px" height="100px" />
+                    </div>
+                    <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} align-items-center mb">
+                        <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" alt="Logo"/>
                     </div>
                     <div t-if="o" t-attf-class="#{'col-auto' if report_type != 'html' else 'col'} mb-2">
                         <div class="company-info" style="text-align: right;">
@@ -56,19 +56,16 @@
                             </p>
                             <t t-if="o.company_id.website">
                                 <p class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
-                                    <strong>Website:</strong>
                                     <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
                                 </p>
                             </t>
                             <t t-if="o.company_id.phone">
                                 <p class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
-                                    <strong>Phone:</strong>
                                     <span t-esc="o.company_id.phone" />
                                 </p>
                             </t>
                             <t t-if="o.company_id.email">
                                 <p  class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
-                                    <strong>Email:</strong>
                                     <span t-esc="o.company_id.email" />
                                 </p>
                             </t>
@@ -102,6 +99,11 @@
                                     <h5 style="white-space:nowrap" class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
                                         <t t-esc="o.partner_id.arabic_name" />
                                     </h5>
+                                    <t t-if="o.partner_id.registration_number">
+                                        <p style="white-space:nowrap" class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
+                                            <strong t-esc="o.partner_id.registration_number" />
+                                        </p>
+                                    </t>
                                     <t t-if="o.partner_id.street">
                                         <p style="white-space:nowrap" class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
                                             <strong t-esc="o.partner_id.street" />
@@ -125,19 +127,16 @@
                                     </p>
                                     <t t-if="o.company_id.website">
                                         <p  style="white-space:nowrap" class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
-                                            <strong>Website:</strong>
                                             <a t-att-href="'http://' + o.company_id.website" t-esc="o.company_id.website" />
                                         </p>
                                     </t>
                                     <t t-if="o.partner_id.phone">
                                         <p style="white-space:nowrap"  class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
-                                            <strong>Phone:</strong>
                                             <span t-esc="o.partner_id.phone" />
                                         </p>
                                     </t>
                                     <t t-if="o.partner_id.email">
                                         <p style="white-space:nowrap" class="mb-0" t-att-style="'color: %s;' % (o.company_id.primary_color or '#000000')">
-                                            <strong>Email:</strong>
                                             <span t-esc="o.partner_id.email" />
                                         </p>
                                     </t>
